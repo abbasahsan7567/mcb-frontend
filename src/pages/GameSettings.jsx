@@ -20,6 +20,8 @@ const GameSettings = () => {
 		playLimit: 0,
 		screenUrls: {},
 		date: '',
+		envName: '',
+		storeName: ''
 	})
 
 	const [loading, setLoading] = useState(false);
@@ -72,6 +74,9 @@ const GameSettings = () => {
 		formData.append('playLimit', newSettings.playLimit)
 		formData.append('screenUrls', JSON.stringify(newSettings.screenUrls))
 		formData.append('date', newSettings.date)
+		formData.append('envName', newSettings.envName)
+		formData.append('storeName', newSettings.storeName)
+
 
 		const formDataObj = Object.fromEntries(formData.entries())
 		console.log('formDataObj', formDataObj)
@@ -92,7 +97,7 @@ const GameSettings = () => {
 		const res = await api.get(`/api/settings`)
 		console.log('res.data : ', res.data);
 		const settingsData = res.data;
-		if(settingsData) {
+		if (settingsData) {
 			setNewSettings({
 				avatarToggler: settingsData.avatarToggler,
 				instructionMessages: settingsData.instructionMessages,
@@ -102,8 +107,10 @@ const GameSettings = () => {
 				playLimit: settingsData.playLimit,
 				screenUrls: settingsData.screenUrls,
 				date: settingsData.date,
+				envName: settingsData.envName,
+				storeName: settingsData.storeName
 			});
-			setSettingsUrls (settingsData.screenUrls)
+			setSettingsUrls(settingsData.screenUrls)
 		}
 	}
 
@@ -185,7 +192,7 @@ const GameSettings = () => {
 			{/* URLS */}
 			<div className="urls">
 				<h3>Add URLS for different screens</h3>
-				<ScreenUrls newSettings={newSettings} setNewSettings={setNewSettings} settingsUrls ={settingsUrls}/>
+				<ScreenUrls newSettings={newSettings} setNewSettings={setNewSettings} settingsUrls={settingsUrls} />
 			</div>
 
 			{/* Showcase date */}
@@ -197,6 +204,25 @@ const GameSettings = () => {
 					onChange={(e) => setNewSettings((prevSettings) => ({ ...prevSettings, date: e.target.value }))}
 				/>
 			</div>
+
+			{/* Showcase Env Name */}
+			<div className="envName">
+				<h3>Environment Name</h3>
+				<input
+					value={newSettings.envName}
+					onChange={(e) => setNewSettings((prevSettings) => ({ ...prevSettings, envName: e.target.value }))}
+				/>
+			</div>
+
+			{/* Showcase Store Name */}
+			<div className="storeName">
+				<h3>Store Name</h3>
+				<input
+					value={newSettings.storeName}
+					onChange={(e) => setNewSettings((prevSettings) => ({ ...prevSettings, storeName: e.target.value }))}
+				/>
+			</div>
+
 
 			<button className="submit_settings_btn" onClick={handleSettings}>
 				Save Settings

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-	baseURL: 'https://andy-game-backend.herokuapp.com',
+	baseURL: 'https://mcb-backend-app-e15061d9058f.herokuapp.com',
 	// baseURL: 'http://localhost:5000',
 })
 
