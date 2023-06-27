@@ -20,8 +20,8 @@ const GameSettings = () => {
 		playLimit: 0,
 		screenUrls: {},
 		date: '',
-		envName: '',
-		storeName: ''
+		envName: 'Town',
+		storeName: 'Style'
 	})
 
 	const [loading, setLoading] = useState(false);
@@ -70,12 +70,12 @@ const GameSettings = () => {
 		formData.append('instructionMessages', JSON.stringify(newSettings.instructionMessages))
 		formData.append('soundFile', newSettings.soundFile)
 		formData.append('screenQuestions', JSON.stringify(newSettings.screenQuestions))
-		formData.append('coinEarnings', newSettings.coinEarnings)
-		formData.append('playLimit', newSettings.playLimit)
+		formData.append('coinEarnings', newSettings.coinEarnings === '' ? 0 : newSettings.coinEarnings)
+		formData.append('playLimit', newSettings.playLimit === '' ? 0 : newSettings.playLimit)
 		formData.append('screenUrls', JSON.stringify(newSettings.screenUrls))
 		formData.append('date', newSettings.date)
-		formData.append('envName', newSettings.envName)
-		formData.append('storeName', newSettings.storeName)
+		formData.append('envName', newSettings.envName === '' ? 'Town': newSettings.envName)
+		formData.append('storeName', newSettings.storeName === '' ? 'Style' : newSettings.storeName)
 
 
 		const formDataObj = Object.fromEntries(formData.entries())
